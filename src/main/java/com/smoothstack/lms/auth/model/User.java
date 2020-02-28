@@ -42,10 +42,12 @@ public class User implements UserDetails, Serializable {
 
 	@Column(name = "username")
 	@NotNull
+	@NotBlank
 	private String username;
 
 	@Column(name = "password", nullable = false)
 	@NotNull
+	@NotBlank
 	private String password;
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH }, fetch = FetchType.LAZY)
