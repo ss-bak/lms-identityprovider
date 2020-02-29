@@ -1,4 +1,4 @@
-package com.smoothstack.lms.auth.model;
+package com.smoothstack.lms.identityprovider.model;
 
 import java.io.Serializable;
 

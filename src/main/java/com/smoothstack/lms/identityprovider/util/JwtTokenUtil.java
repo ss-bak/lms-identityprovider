@@ -1,4 +1,4 @@
-package com.smoothstack.lms.auth.util;
+package com.smoothstack.lms.identityprovider.util;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.smoothstack.lms</groupId>
-	<artifactId>auth</artifactId>
+	<artifactId>lms-identityprovider</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>auth</name>
+	<name>lms-identityprovider</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
