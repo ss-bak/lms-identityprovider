@@ -62,13 +62,13 @@ public class AuthController {
 	@Produces({ MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Object> getUser(HttpServletRequest request) {
 		try {
-			final String requestTokenHeader = request.getHeader("Authorization");
+			final String requestTokenHeader = request.getHeader("Proxy-Authorization");
 			String jwt = null;
 			String username = null;
-			if (requestTokenHeader == null || !requestTokenHeader.startsWith("Bearer ")) {
+			if (requestTokenHeader == null || !requestTokenHeader.startsWith("JWT ")) {
 				return ResponseEntity.badRequest().build();
 			}
-			jwt = requestTokenHeader.substring(7);
+			jwt = requestTokenHeader.substring(4);
 			username = jwtTokenUtil.getUsernameFromToken(jwt);
 			if (username == null) {
 				return ResponseEntity.notFound().build();
