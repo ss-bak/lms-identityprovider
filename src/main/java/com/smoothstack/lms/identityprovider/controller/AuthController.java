@@ -167,34 +167,4 @@ public class AuthController {
 		}
 	}
 
-	@GetMapping(value = "/spring-user")
-	@Produces({ MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<Object> getspringUser(HttpServletRequest request) {
-		try {
-			final String requestTokenHeader = request.getHeader("Proxy-Authorization");
-			String jwt = null;
-			String username = null;
-			if (requestTokenHeader == null || !requestTokenHeader.startsWith("JWT ")) {
-				return ResponseEntity.badRequest().build();
-			}
-			jwt = requestTokenHeader.substring(4);
-			System.out.printf("\n\nJWT = %s\n\n", jwt);
-			username = jwtTokenUtil.getUsernameFromToken(jwt);
-			if (username == null) {
-				return ResponseEntity.notFound().build();
-			}
-			User user = userDetailsService.loadByUsernameNoPassword(username);
-			org.springframework.security.core.userdetails.User.UserBuilder builder = org.springframework.security.core.userdetails.User
-					.withUsername(user.getUsername());
-			builder.password(user.getPassword());
-			builder.roles(user.getUserRoleSet().toArray(new String[0]));
-			if (!jwtTokenUtil.validateToken(jwt, user)) {
-				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-			}
-			return ResponseEntity.ok(builder.build());
-		} catch (IllegalArgumentException | SignatureException | MalformedJwtException | ExpiredJwtException e) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-		}
-	}
-
 }
