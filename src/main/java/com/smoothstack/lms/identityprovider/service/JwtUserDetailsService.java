@@ -35,7 +35,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) {
 		User user = userRepository.findOneByUsername(username);
 		UserBuilder userBuilder = org.springframework.security.core.userdetails.User.withUsername(user.getUsername());
-		userBuilder.password("<REDACTED>");
+		userBuilder.password(user.getPassword());
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>(user.getUserRoleSet().size());
 		user.getUserRoleSet().forEach(role -> {
 			authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
