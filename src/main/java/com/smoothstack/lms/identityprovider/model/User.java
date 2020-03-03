@@ -1,6 +1,5 @@
-package com.smoothstack.lms.auth.model;
+package com.smoothstack.lms.identityprovider.model;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -31,7 +30,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Table(name = "t_user")
 @Access(AccessType.FIELD)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userId")
-public class User implements UserDetails, Serializable {
+public class User implements UserDetails {
 
 	@Id
 	@Column(name = "userId")
@@ -72,9 +71,17 @@ public class User implements UserDetails, Serializable {
 		return userId;
 	}
 
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+
 	@Override
 	public String getUsername() {
 		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	@Override
@@ -82,28 +89,40 @@ public class User implements UserDetails, Serializable {
 		return password;
 	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Set<Role> getUserRoleSet() {
+		return userRoleSet;
+	}
+
+	public void setUserRoleSet(Set<Role> userRoleSet) {
+		this.userRoleSet = userRoleSet;
+	}
+
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }
